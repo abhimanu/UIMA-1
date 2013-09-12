@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>TypeSystemDescriptor</name>
+    <description/>
+    <version>1.0</version>
+    <vendor/>
+  <types>
+    <typeDescription>
+      <name>Hw1.Token</name>
+      <description>Token clas that stores the tokens present in the input data</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>stringText</name>
+          <description>This is the actual text of the token</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>tokenId</name>
+          <description>This is the unique id of the token</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>isAscii</name>
+          <description>Is the token ascii or not</description>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>partOfSpeech</name>
+          <description>This is the part of speech tag for the token</description>
+          <rangeTypeName>uima.cas.TOP</rangeTypeName>
+        </featureDescription>
+      <featureDescription>
+          <name>lexicalFatureList</name>
+          <description>This is the list of lexical features such as morphology etc. for the token</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>uima.cas.TOP</elementType>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  <typeDescription>
+      <name>Hw1.Ngram</name>
+      <description>This is the ngrams created using the tokens in the sentence</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>tokenList</name>
+          <description>This is the list of the tokens that comprise the ngram</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>Hw1.Token</elementType>
+        </featureDescription>
+        <featureDescription>
+          <name>ngramId</name>
+          <description>THis is the unique id of the ngram </description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>length</name>
+          <description>This is the length of the ngram e.g bigram, trigram etc.</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>semanticFeatureList</name>
+          <description>This is the list of semantic features of the ngram e.g. semantic roles etc.</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>uima.cas.TOP</elementType>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>Hw1.Sentence</name>
+      <description>This is the sentence class which for the sentences in the data.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>language</name>
+          <description>This stores the labugae of the sentence</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>tokenList</name>
+          <description>This is the list of the tokens in the sentence</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>Hw1.Token</elementType>
+        </featureDescription>
+        <featureDescription>
+          <name>length</name>
+          <description>This is length of the sentence in terms of the tokens</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>nGramList</name>
+          <description>This is the list of ngrams in the sentence</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>Hw1.Ngram</elementType>
+        </featureDescription>
+        <featureDescription>
+          <name>senctenceId</name>
+          <description>This is the unique id for the sentence in the dataset</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>parseTree</name>
+          <description>This is the semantic or syntactic parse tree of the sentence</description>
+          <rangeTypeName>uima.cas.TOP</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>Hw1.Question</name>
+      <description>This is the question class for modelling the questions that encapsulates the properties of the question</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>sentence</name>
+          <description>This is the actual body of the question which is encapsulated by the sentence class</description>
+          <rangeTypeName>Hw1.Sentence</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>questionId</name>
+          <description>This is the unique id of the question</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>Hw1.Answer</name>
+      <description>This is the class that models the answers of the questions and theior attributes</description>
+      <supertypeName>Hw1.ConfidenceEntity</supertypeName>
+      <features>
+        <featureDescription>
+          <name>sentence</name>
+          <description>This is the sentence body of the answer </description>
+          <rangeTypeName>Hw1.Sentence</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>correct</name>
+          <description>This feature says whether the answer is correct or otherwise</description>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>score</name>
+          <description>This is the score assigned to the sentence</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>rank</name>
+          <description>This is the rank of the sentence accroding to the score</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>answerId</name>
+          <description>This is the unique id of the answer</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>questionId</name>
+          <description>This is the unique questionId that the sentence is answer of.</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>Hw1.ConfidenceEntity</name>
+      <description>This class captures the confidence and source of the annotation</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>source</name>
+          <description>This is the source of the anotation/label</description>
+          <rangeTypeName>uima.cas.TOP</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>confidence</name>
+          <description>This is the confidence score of the annotation</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>
